@@ -332,7 +332,7 @@ Please answer based on the above context, clarifying or expanding the analysis a
 """
     try:
         response = genai.generate_text(
-            model="text-bison-001",
+            model="models/text-bison-001",
             prompt=prompt
         )
         if not response.text:
@@ -382,7 +382,7 @@ def analyze_with_gemini(report):
     try:
         logging.info("Starting AI analysis with Google Gemini...")
         response = genai.generate_text(
-            model="text-bison-001",
+            model="models/text-bison-001",
             prompt=f"""You are a penetration tester analyzing a security report. (If you did not see the report, tell 'no python file found in project'.)
 Sort vulnerabilities by highest likelihood of successful exploitation and provide a concise penetration testing approach.
 First give a short summary of the Analysis in 2-3 lines.
