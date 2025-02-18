@@ -379,14 +379,11 @@ def save_bandit_report(report):
         logging.error("Error saving Bandit report: %s", e)
 
 def analyze_with_gemini(report):
-    """
-    Sends the Bandit report to Gemini AI for analysis using the configured API key.
-    """
     try:
         logging.info("Starting AI analysis with Google Gemini...")
-        response = genai.models.generate_content(
+        response = genai.generate_text(
             model="gemini-2.0-flash",
-            contents=f"""You are a penetration tester analyzing a security report. (If you did not see the report, tell 'no python file found in project'.)
+            prompt=f"""You are a penetration tester analyzing a security report. (If you did not see the report, tell 'no python file found in project'.)
 Sort vulnerabilities by highest likelihood of successful exploitation and provide a concise penetration testing approach.
 First give a short summary of the Analysis in 2-3 lines.
 
@@ -421,6 +418,7 @@ Analyze the report below and return findings in this format (if you did not see 
     except Exception as e:
         logging.exception("Exception occurred while analyzing with Google Gemini")
         return f"Error analyzing with Gemini AI: {e}"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
