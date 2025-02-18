@@ -1,5 +1,4 @@
 Flask==2.2.5
-Werkzeug==2.2.5
 google-generativeai==0.4.1
 bandit==1.7.4
 gunicorn==20.1.0
