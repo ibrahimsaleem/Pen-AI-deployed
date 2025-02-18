@@ -1,0 +1,250 @@
+Error running Bandit: Working... ---------------------------------------- 100% 0:00:02
+Run started:2025-02-18 09:54:08.949348
+
+Test results:
+>> Issue: [B703:django_mark_safe] Potential XSS on mark_safe function.
+   Severity: Medium   Confidence: High
+   CWE: CWE-80 (https://cwe.mitre.org/data/definitions/80.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b703_django_mark_safe.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:22:40
+21	            """.format(link=register_link)
+22	            raise forms.ValidationError(mark_safe(msg))
+23	        return email
+
+--------------------------------------------------
+>> Issue: [B308:blacklist] Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.
+   Severity: Medium   Confidence: High
+   CWE: CWE-79 (https://cwe.mitre.org/data/definitions/79.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b308-mark-safe
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:22:40
+21	            """.format(link=register_link)
+22	            raise forms.ValidationError(mark_safe(msg))
+23	        return email
+
+--------------------------------------------------
+>> Issue: [B703:django_mark_safe] Potential XSS on mark_safe function.
+   Severity: Medium   Confidence: High
+   CWE: CWE-80 (https://cwe.mitre.org/data/definitions/80.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b703_django_mark_safe.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:132:48
+131	                    msg1 = "Please check your email to confirm your account or " + reconfirm_msg.lower()
+132	                    raise forms.ValidationError(mark_safe(msg1))
+133	                email_confirm_exists = EmailActivation.objects.email_exists(email).exists()
+
+--------------------------------------------------
+>> Issue: [B308:blacklist] Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.
+   Severity: Medium   Confidence: High
+   CWE: CWE-79 (https://cwe.mitre.org/data/definitions/79.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b308-mark-safe
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:132:48
+131	                    msg1 = "Please check your email to confirm your account or " + reconfirm_msg.lower()
+132	                    raise forms.ValidationError(mark_safe(msg1))
+133	                email_confirm_exists = EmailActivation.objects.email_exists(email).exists()
+
+--------------------------------------------------
+>> Issue: [B703:django_mark_safe] Potential XSS on mark_safe function.
+   Severity: Medium   Confidence: High
+   CWE: CWE-80 (https://cwe.mitre.org/data/definitions/80.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b703_django_mark_safe.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:136:48
+135	                    msg2 = "Email not confirmed. " + reconfirm_msg
+136	                    raise forms.ValidationError(mark_safe(msg2))
+137	                if not is_confirmable and not email_confirm_exists:
+
+--------------------------------------------------
+>> Issue: [B308:blacklist] Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.
+   Severity: Medium   Confidence: High
+   CWE: CWE-79 (https://cwe.mitre.org/data/definitions/79.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b308-mark-safe
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\forms.py:136:48
+135	                    msg2 = "Email not confirmed. " + reconfirm_msg
+136	                    raise forms.ValidationError(mark_safe(msg2))
+137	                if not is_confirmable and not email_confirm_exists:
+
+--------------------------------------------------
+>> Issue: [B703:django_mark_safe] Potential XSS on mark_safe function.
+   Severity: Medium   Confidence: High
+   CWE: CWE-80 (https://cwe.mitre.org/data/definitions/80.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b703_django_mark_safe.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\views.py:54:46
+53	                    """.format(link=reset_link)
+54	                    messages.success(request, mark_safe(msg))
+55	                    return redirect("login") 
+
+--------------------------------------------------
+>> Issue: [B308:blacklist] Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.
+   Severity: Medium   Confidence: High
+   CWE: CWE-79 (https://cwe.mitre.org/data/definitions/79.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b308-mark-safe
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\accounts\views.py:54:46
+53	                    """.format(link=reset_link)
+54	                    messages.success(request, mark_safe(msg))
+55	                    return redirect("login") 
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b110_try_except_pass.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\analytics\models.py:89:8
+88	            self.save()
+89	        except:
+90	            pass
+91	        return self.ended
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b110_try_except_pass.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\__init__.py:7:0
+6	    from .local import *
+7	except:
+8	    pass
+9	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b110_try_except_pass.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\__init__.py:12:0
+11	    from .local_justin import *
+12	except:
+13	    pass
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b105_hardcoded_password_string.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\base.py:23:13
+22	# SECURITY WARNING: keep the secret key used in production secret!
+23	SECRET_KEY = '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+24	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'yourpassword'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b105_hardcoded_password_string.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\base.py:32:22
+31	EMAIL_HOST_USER = 'hungrypy@gmail.com' 
+32	EMAIL_HOST_PASSWORD = 'yourpassword'
+33	EMAIL_PORT = 587
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'sk_test_cu1lQmcg1OLffhLvYrSCp5XE'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b105_hardcoded_password_string.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\base.py:87:20
+86	
+87	STRIPE_SECRET_KEY = "sk_test_cu1lQmcg1OLffhLvYrSCp5XE"
+88	STRIPE_PUB_KEY = 'pk_test_PrV61avxnHaWIYZEeiYTTVMZ'
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b105_hardcoded_password_string.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\local.py:22:13
+21	# SECURITY WARNING: keep the secret key used in production secret!
+22	SECRET_KEY = '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+23	
+
+--------------------------------------------------
+>> Issue: [B104:hardcoded_bind_all_interfaces] Possible binding to all interfaces.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-605 (https://cwe.mitre.org/data/definitions/605.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b104_hardcoded_bind_all_interfaces.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\settings\local.py:27:17
+26	
+27	ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+28	
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b311-random
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\utils.py:66:19
+65	def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
+66	    return ''.join(random.choice(chars) for _ in range(size))
+67	
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b311-random
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\ecommerce\utils.py:73:11
+72	    """
+73	    size = random.randint(30, 45)
+74	    key = random_string_generator(size=size)
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b324_hashlib.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\marketing\utils.py:22:8
+21	    member_email = member_email.lower().encode()
+22	    m = hashlib.md5(member_email)
+23	    return m.hexdigest()
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Call to requests without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b113_request_without_timeout.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\marketing\utils.py:50:12
+49	        }
+50	        r = requests.put(endpoint, auth=("", self.key), data=json.dumps(data))
+51	        return r.status_code, r.json()
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Call to requests without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/plugins/b113_request_without_timeout.html
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\marketing\utils.py:57:12
+56	        endpoint = self.get_members_endpoint() + "/" +  hashed_email
+57	        r = requests.get(endpoint, auth=("", self.key))
+58	        return r.status_code, r.json()
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.2/blacklists/blacklist_calls.html#b311-random
+   Location: C:\Users\Ibrah\AppData\Local\Temp\tmpjg359_k8\src\products\models.py:24:19
+23	    #print(filename)
+24	    new_filename = random.randint(1,3910209312)
+25	    name, ext = get_filename_ext(filename)
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 3650
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 10
+		Medium: 11
+		High: 1
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 2
+		Medium: 5
+		High: 15
+Files skipped (0):
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.12.6
+[warnings]	WARNING	invalid escape sequence '\#'
