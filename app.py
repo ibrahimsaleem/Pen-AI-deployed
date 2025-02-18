@@ -133,7 +133,7 @@ def index():
                 <input type="text" id="api_key" name="api_key" class="prompt-input"
                        placeholder="Enter your Gemini API key (optional)" /><br>
                 <input type="text" id="file_path" name="file_path" class="prompt-input"
-                       placeholder="Enter folder path or GitHub URL to analyze..." /><br>
+                       placeholder="Enter GitHub Project URL to analyze..." /><br>
                 <button type="submit" class="submit-btn">Analyze</button>
             </form>
             
@@ -332,7 +332,7 @@ Please answer based on the above context, clarifying or expanding the analysis a
 """
     try:
         response = genai.generate_text(
-            model="tunedModels/gemini-1.5-flash",
+            model="text-bison-001",
             prompt=prompt
         )
         if not response.text:
@@ -382,7 +382,7 @@ def analyze_with_gemini(report):
     try:
         logging.info("Starting AI analysis with Google Gemini...")
         response = genai.generate_text(
-            model="tunedModels/gemini-1.5-flash",
+            model="text-bison-001",
             prompt=f"""You are a penetration tester analyzing a security report. (If you did not see the report, tell 'no python file found in project'.)
 Sort vulnerabilities by highest likelihood of successful exploitation and provide a concise penetration testing approach.
 First give a short summary of the Analysis in 2-3 lines.
