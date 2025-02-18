@@ -321,9 +321,6 @@ def ask_more():
     return jsonify({"answer": answer})
 
 def ask_gemini_followup(original_analysis, question):
-    """
-    Sends a follow-up question to Gemini AI, providing the original analysis as context.
-    """
     prompt = f"""
 You previously provided the following security analysis:
 {original_analysis}
@@ -334,9 +331,9 @@ Now the user asks:
 Please answer based on the above context, clarifying or expanding the analysis as needed.
 """
     try:
-        response = genai.models.generate_content(
+        response = genai.generate_text(
             model="gemini-2.0-flash",
-            contents=prompt
+            prompt=prompt
         )
         if not response.text:
             return "Error: No response from AI for follow-up."
