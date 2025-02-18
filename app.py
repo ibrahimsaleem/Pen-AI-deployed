@@ -13,13 +13,13 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 # Read the default Gemini API key from environment variable (or use a fallback)
 DEFAULT_GENAI_API_KEY = os.environ.get("GENAI_API_KEY", "YOUR_DEFAULT_API_KEY")
-# Create a default client using the default API key.
-default_client = genai.Client(api_key=DEFAULT_GENAI_API_KEY)
+# Configure the module with the default API key
+genai.configure(api_key=DEFAULT_GENAI_API_KEY)
 
 app = Flask(__name__)
 
-# In-memory store for analyses. Each entry will be a dict with keys:
-# "analysis": the AI analysis text, and "api_key": the API key used (if any)
+# In-memory store for analyses.
+# Each entry is a dict with keys: "analysis" and "api_key"
 analysis_store = {}
 
 @app.route("/", methods=["GET"])
@@ -173,7 +173,6 @@ def index():
                 conversation.innerHTML += "<div class='message user-message'><strong>You:</strong> " + filePath + "</div>";
                 conversation.innerHTML += "<div class='message bot-message'>Processing... please wait.</div>";
                 conversation.scrollTop = conversation.scrollHeight;
-                // Clear input fields
                 filePathInput.value = "";
 
                 // Build POST body including optional API key
@@ -247,8 +246,12 @@ def analyze():
     """Handles the initial Bandit scan and AI analysis."""
     file_path = request.form.get("file_path")
     provided_api_key = request.form.get("api_key")
-    # Use the provided API key if available; otherwise, use default
-    local_client = genai.Client(api_key=provided_api_key) if provided_api_key else default_client
+    # Use the provided API key if available; otherwise, use default.
+    # (This changes the global configuration; note that this approach isn't thread-safe.)
+    if provided_api_key:
+        genai.configure(api_key=provided_api_key)
+    else:
+        genai.configure(api_key=DEFAULT_GENAI_API_KEY)
     result = []  # Messages to include in final output
     temp_dir = None
 
@@ -272,15 +275,15 @@ def analyze():
         
         # Send the Bandit report to Gemini AI for analysis
         logging.info("Sending Bandit report to AI model...")
-        ai_analysis = analyze_with_gemini(local_client, bandit_output)
+        ai_analysis = analyze_with_gemini(bandit_output)
         result.append("AI processing completed. Here are the results:")
         result.append(ai_analysis)
 
-        # Generate a unique ID and store both the analysis and the API key used (if any)
+        # Generate a unique ID and store both the analysis and the API key used
         analysis_id = str(uuid.uuid4())
         analysis_store[analysis_id] = {
             "analysis": ai_analysis,
-            "api_key": provided_api_key if provided_api_key else None
+            "api_key": provided_api_key if provided_api_key else DEFAULT_GENAI_API_KEY
         }
 
         return jsonify({
@@ -293,7 +296,7 @@ def analyze():
         result.append(f"An error occurred: {e}")
         return jsonify({"output": "\n".join(result)})
     finally:
-        # Clean up cloned repository if one was used
+        # Clean up the cloned repository if one was used
         if file_path and (file_path.startswith("http://") or file_path.startswith("https://")):
             if temp_dir and os.path.exists(temp_dir):
                 try:
@@ -312,11 +315,12 @@ def ask_more():
     stored = analysis_store[analysis_id]
     original_analysis = stored["analysis"]
     stored_api_key = stored.get("api_key")
-    local_client = genai.Client(api_key=stored_api_key) if stored_api_key else default_client
-    answer = ask_gemini_followup(local_client, original_analysis, question)
+    # Reconfigure with the stored API key for follow-up
+    genai.configure(api_key=stored_api_key)
+    answer = ask_gemini_followup(original_analysis, question)
     return jsonify({"answer": answer})
 
-def ask_gemini_followup(client, original_analysis, question):
+def ask_gemini_followup(original_analysis, question):
     """
     Sends a follow-up question to Gemini AI, providing the original analysis as context.
     """
@@ -330,7 +334,7 @@ Now the user asks:
 Please answer based on the above context, clarifying or expanding the analysis as needed.
 """
     try:
-        response = client.models.generate_content(
+        response = genai.models.generate_content(
             model="gemini-2.0-flash",
             contents=prompt
         )
@@ -377,13 +381,13 @@ def save_bandit_report(report):
     except Exception as e:
         logging.error("Error saving Bandit report: %s", e)
 
-def analyze_with_gemini(client, report):
+def analyze_with_gemini(report):
     """
-    Sends the Bandit report to Gemini AI for analysis using the given client.
+    Sends the Bandit report to Gemini AI for analysis using the configured API key.
     """
     try:
         logging.info("Starting AI analysis with Google Gemini...")
-        response = client.models.generate_content(
+        response = genai.models.generate_content(
             model="gemini-2.0-flash",
             contents=f"""You are a penetration tester analyzing a security report. (If you did not see the report, tell 'no python file found in project'.)
 Sort vulnerabilities by highest likelihood of successful exploitation and provide a concise penetration testing approach.
