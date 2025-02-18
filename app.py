@@ -6,7 +6,7 @@ import tempfile
 import shutil
 import uuid
 from flask import Flask, request, render_template_string, jsonify
-from google import genai
+import google.generativeai as genai
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
