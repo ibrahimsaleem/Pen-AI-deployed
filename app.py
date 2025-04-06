@@ -12,7 +12,7 @@ import google.generativeai as genai
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # Read the default Gemini API key from environment variable (or use a fallback)
-DEFAULT_GENAI_API_KEY = os.environ.get("GENAI_API_KEY", "YOUR_DEFAULT_API_KEY")
+DEFAULT_GENAI_API_KEY = os.environ.get("GENAI_API_KEY", "AIzaSyCx3d9qTJBgmIHTdetUqQbHjCHrqnF2Cqc")
 # Configure the module with the default API key
 genai.configure(api_key=DEFAULT_GENAI_API_KEY)
 
